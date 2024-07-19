@@ -9,13 +9,13 @@ test('Ship has a length', () => {
 });
 
 test('Ship gets hit', () => {
-	ship.hit(1);
+	ship.hit();
 	expect(ship.hits).toBe(1);
 });
 
 test('Ship is sunk', () => {
-	ship.hit(0);
-	ship.hit(1);
-	ship.hit(2);
+	ship.hit();
+	ship.hit();
+	ship.hit();
 	expect(ship.isSunk()).toBe(true);
 });

@@ -1,13 +1,16 @@
 class Ship {
 	constructor(length) {
 		this.length = length;
-		this.hits = 0;
-		this.isSunk = false;
+		this.hits = [];
 	}
 
-	hit() {}
+	hit() {
+		this.hits++;
+	}
 
-	isSunk() {}
+	isSunk() {
+		return this.hits >= this.length;
+	}
 }
 
 module.exports = { Ship };

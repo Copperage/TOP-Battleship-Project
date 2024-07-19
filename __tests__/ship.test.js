@@ -1,4 +1,3 @@
-const { default: expect } = require('expect');
 const { Ship } = require('../src/ship');
 
 beforeEach(() => {

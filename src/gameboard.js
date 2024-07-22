@@ -1,19 +1,35 @@
+import { Ship } from './ship.js';
+
 class gameBoard {
 	constructor() {
 		this.ships = [];
 	}
 
-	board = [Array.from({ length: 10 }), () => Array(10).fill(null)];
+	// fill the board
+	board = [Array.from({ length: 10 }), () => Array(10).fill(x)];
+	// visualization:
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
+	//[x, x, x, x, x, x, x, x, x, x]
 
-	placeShip(ship, x, y) {
-		this.ships.push(ship, x, y);
+	placeShip(length, x, y) {
+		this.ships.push(length, x, y);
 	}
 
 	recieveAttack() {}
 
 	missedAttack() {}
 
-	isSunk() {}
+	allSunk() {
+		return this.ships.every((ship) => ship.isSunk());
+	}
 }
 
 module.exports = { gameBoard };

@@ -1,3 +1,5 @@
+import { gameBoard } from './gameboard.js';
+
 class Ship {
 	constructor(length) {
 		this.length = length;

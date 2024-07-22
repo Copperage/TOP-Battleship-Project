@@ -1,17 +1,20 @@
-import { gameBoard } from './gameboard.js';
+const { gameBoard } = require('./gameboard.js');
 
 class Ship {
-	constructor(length) {
-		this.length = length;
-		this.hits = [];
+	constructor(shipName, shipLength) {
+		this.name = shipName;
+		this.length = shipLength;
+		this.hits = 0;
+		this.shipSunk = false;
 	}
 
 	hit() {
 		this.hits++;
 	}
 
-	isSunk() {
-		return this.hits >= this.length;
+	isShipSunk() {
+		this.shipSunk = this.hits === this.length;
+		return this.shipSunk;
 	}
 }
 

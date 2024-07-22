@@ -1,4 +1,4 @@
-import { Ship } from './ship.js';
+const { Ship } = require('./ship.js');
 
 class gameBoard {
 	constructor() {
@@ -19,8 +19,8 @@ class gameBoard {
 	//[x, x, x, x, x, x, x, x, x, x]
 	//[x, x, x, x, x, x, x, x, x, x]
 
-	placeShip(length, x, y) {
-		this.ships.push(length, x, y);
+	placeShip(ship, x, y) {
+		this.ships.push(ship);
 	}
 
 	recieveAttack() {}
@@ -28,7 +28,7 @@ class gameBoard {
 	missedAttack() {}
 
 	allSunk() {
-		return this.ships.every((ship) => ship.isSunk());
+		return this.ships.every((ship) => ship.isShipSunk());
 	}
 }
 

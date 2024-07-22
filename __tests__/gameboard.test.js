@@ -17,7 +17,9 @@ test('You can place ships on the gameboard', () => {
 });
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
-	expect();
+	let newShip = new Ship[(3, 2, 1)]();
+	board.recieveAttack(2, 1);
+	expect(newShip.hits).toBe(1);
 });
 
 test('Track missed shots so they can be displayed on the gameboard DOM', () => {
@@ -25,11 +27,23 @@ test('Track missed shots so they can be displayed on the gameboard DOM', () => {
 });
 
 test('Check if all ships are sunk to end the game', () => {
-	board.ships = [new Ship(3), new Ship(3), new Ship(3)];
+	const ship1 = new Ship('Destroyer', 3);
+	const ship2 = new Ship('Submarine', 3);
+	const ship3 = new Ship('Cruiser', 3);
 
-	board.ships[0].hits = 3;
-	board.ships[1].hits = 3;
-	board.ships[2].hits = 3;
+	board.placeShip(ship1, 0, 0);
+	board.placeShip(ship2, 0, 1);
+	board.placeShip(ship3, 0, 2);
+
+	ship1.hit();
+	ship1.hit();
+	ship1.hit();
+	ship2.hit();
+	ship2.hit();
+	ship2.hit();
+	ship3.hit();
+	ship3.hit();
+	ship3.hit();
 
 	expect(board.allSunk()).toBe(true);
 });

@@ -4,6 +4,11 @@ class Ship {
 		this.length = shipLength;
 		this.hits = 0;
 		this.shipSunk = false;
+		this.position = [];
+	}
+
+	setPosition(position) {
+		this.position = position;
 	}
 
 	hit() {

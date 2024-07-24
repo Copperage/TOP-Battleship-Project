@@ -1,5 +1,3 @@
-const { gameBoard } = require('./gameboard.js');
-
 class Ship {
 	constructor(shipName, shipLength) {
 		this.name = shipName;
@@ -18,4 +16,4 @@ class Ship {
 	}
 }
 
-module.exports = { Ship };
+export default Ship;

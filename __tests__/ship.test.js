@@ -1,10 +1,13 @@
-const { Ship } = require('../src/ship');
+import Ship from '../src/ship.js';
+
+let ship;
 
 beforeEach(() => {
 	ship = new Ship('Destroyer', 3);
 });
 
-test('Ship has a name and  length', () => {
+test('Ship has the correct name and length', () => {
+	let ship = new Ship('Destroyer', 3);
 	expect(ship.name).toBe('Destroyer');
 	expect(ship.length).toBe(3);
 });

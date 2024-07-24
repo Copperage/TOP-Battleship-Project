@@ -1,5 +1,5 @@
-const { gameBoard } = require('../src/gameboard');
-const { Ship } = require('../src/ship');
+import gameBoard from '../src/gameboard';
+import Ship from '../src/ship';
 
 let board;
 
@@ -17,7 +17,7 @@ test('You can place ships on the gameboard', () => {
 });
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
-	let newShip = new Ship[(3, 2, 1)]();
+	let newShip = new Ship('Destroyer', 3);
 	board.recieveAttack(2, 1);
 	expect(newShip.hits).toBe(1);
 });
@@ -27,9 +27,9 @@ test('Track missed shots so they can be displayed on the gameboard DOM', () => {
 });
 
 test('Check if all ships are sunk to end the game', () => {
-	const ship1 = new Ship('Destroyer', 3);
-	const ship2 = new Ship('Submarine', 3);
-	const ship3 = new Ship('Cruiser', 3);
+	let ship1 = new Ship('Destroyer', 3);
+	let ship2 = new Ship('Submarine', 3);
+	let ship3 = new Ship('Battleship', 4);
 
 	board.placeShip(ship1, 0, 0);
 	board.placeShip(ship2, 0, 1);
@@ -41,6 +41,7 @@ test('Check if all ships are sunk to end the game', () => {
 	ship2.hit();
 	ship2.hit();
 	ship2.hit();
+	ship3.hit();
 	ship3.hit();
 	ship3.hit();
 	ship3.hit();

@@ -1,4 +1,4 @@
-const { Ship } = require('./ship.js');
+import { Ship } from './ship.js';
 
 class gameBoard {
 	constructor() {
@@ -23,7 +23,10 @@ class gameBoard {
 		this.ships.push(ship);
 	}
 
-	recieveAttack() {}
+	recieveAttack(hitx, hity) {
+		[hitx, hity] === this.ships.find(x, y);
+		this.recieveAttack();
+	}
 
 	missedAttack() {}
 
@@ -32,4 +35,4 @@ class gameBoard {
 	}
 }
 
-module.exports = { gameBoard };
+export default gameBoard;

@@ -2,9 +2,9 @@ class Ship {
 	constructor(shipName, shipLength) {
 		this.name = shipName;
 		this.length = shipLength;
+		this.position = [];
 		this.hits = 0;
 		this.shipSunk = false;
-		this.position = [];
 	}
 
 	setPosition(position) {

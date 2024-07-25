@@ -3,6 +3,8 @@ import Ship from '../src/ship';
 
 let board;
 
+// Board tests
+
 beforeEach(() => {
 	board = new gameBoard();
 });
@@ -11,31 +13,39 @@ test('Gameboard is a grid', () => {
 	expect(board.board).toBeInstanceOf(Array);
 });
 
+test('Gameboard is 10x10', () => {
+	expect(board.board.length).toBe(10);
+	expect(board.board[0].length).toBe(10);
+});
+
+// Place Ships tests
+
 test('You can place ships on the gameboard', () => {
-	let newShip = new Ship('Destroyer', 3);
-	let position = [[2, 1]];
+	let newShip = new Ship('Patrol Boat', 1);
+	let position = [2, 1];
 
 	board.placeShip(newShip, position);
 
-	expect(newShip.position).toEqual(position);
-	expect(board.ships).toContain(newShip);
+	expect(newShip.position).toEqual([2, 1]);
+	expect(board.ships).toContainEqual(
+		expect.objectContaining({ name: 'Patrol Boat' })
+	);
 });
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
 	let newShip = new Ship('Destroyer', 3);
-	newShip.setPosition(newShip, [
+	board.placeShip(newShip, [
 		[2, 1],
 		[2, 2],
 		[2, 3],
 	]);
 
-	board.recieveAttack(2, 1);
-	expect(newShip.hits).toBe(1);
+	expect(board.recieveAttack([2, 1])).toBe(true);
 });
 
-test('Track missed shots so they can be displayed on the gameboard DOM', () => {
-	expect();
-});
+// test('Track missed shots so they can be displayed on the gameboard DOM', () => {
+// 	expect();
+// });
 
 test('Check if all ships are sunk to end the game', () => {
 	let ship1 = new Ship('Destroyer', 3);

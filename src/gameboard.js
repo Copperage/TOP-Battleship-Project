@@ -1,4 +1,4 @@
-import { Ship } from './ship.js';
+import Ship from './ship.js';
 
 class gameBoard {
 	constructor() {
@@ -27,10 +27,12 @@ class gameBoard {
 		this.ships.push(ship);
 	}
 
-	recieveAttack(x, y) {
-		if (this.board[x][y] === null) {
+	recieveAttack([x, y]) {
+		const boardCell = this.board[x][y];
+		if (boardCell === null) {
 			return false;
-		} else if (this.board[x][y] === ship) {
+		} else if (boardCell instanceof Ship) {
+			boardCell.hit();
 			return true;
 		}
 		return false;

@@ -25,7 +25,11 @@ test('You can place ships on the gameboard', () => {
 
 	board.placeShip(newShip, 2, 1);
 
-	expect(newShip.position).toEqual([2, 1], [2, 2], [2, 3]);
+	expect(newShip.position).toEqual([
+		[2, 1],
+		[2, 2],
+		[2, 3],
+	]);
 	expect(board.ships).toContainEqual(
 		expect.objectContaining({ name: 'Destroyer' })
 	);
@@ -33,11 +37,8 @@ test('You can place ships on the gameboard', () => {
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
 	let newShip = new Ship('Destroyer', 3);
-	board.placeShip(newShip, [
-		[2, 1],
-		[2, 2],
-		[2, 3],
-	]);
+
+	board.placeShip(newShip, 2, 1);
 
 	expect(board.recieveAttack([2, 1])).toBe(true);
 	expect(newShip.hits).toBe(1);

@@ -18,21 +18,22 @@ class gameBoard {
 	//[x, x, x, x, x, x, x, x, x, x]
 
 	placeShip(ship, x, y) {
-		ship.position = [x, y];
+		ship.position = [];
+
 		for (let i = 0; i < ship.length; i++) {
 			this.board[x][y + i] = ship;
+			ship.position.push([x, y + i]);
 		}
 		this.ships.push(ship);
 	}
 
 	recieveAttack(x, y) {
-		for (let i = 0; i < this.ships.length; i++) {
-			if (this.ships[i].position.includes([x, y])) {
-				this.ships[i].hit();
-				return true;
-			}
+		if (this.board[x][y] === null) {
 			return false;
+		} else if (this.board[x][y] === ship) {
+			return true;
 		}
+		return false;
 	}
 
 	allSunk() {

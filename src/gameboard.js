@@ -2,41 +2,48 @@ import Ship from './ship.js';
 
 class gameBoard {
 	constructor() {
-		this.ships = [];
 		this.missedShots = [];
-		this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
+		this.ships = [];
+		this.board = Array.from({ length: 10 }, () =>
+			Array.from({ length: 10 }, () => null)
+		);
 	}
+
 	// visualization:
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
-	//[null, null, null, null, null, null, null, null, null, null]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
 
 	placeShip(ship, x, y) {
 		ship.position = [];
 
 		for (let i = 0; i < ship.length; i++) {
-			this.board[x][y + i] = ship;
+			this.board[x][y + i] = {
+				shipName: ship,
+				shipIndex: i,
+				hit: false,
+			};
+
 			ship.position.push([x, y + i]);
 		}
 		this.ships.push(ship);
 	}
 
 	receiveAttack(x, y) {
-		if (this.board[x][y] === null) {
-			this.missedShots.push({ x: x, y: y });
+		let boardCell = this.board[x][y];
+
+		if (boardCell === null) {
+			this.missedShots.push({ x, y });
 		} else {
-				const shipIndex = this.board[y][x].shipIndex;
-				const ship = this.ships.find((ship) => ship.shipIndex === shipIndex);
-				
-				ship.hit(shipIndex);
-			  }
+			boardCell.shipName.hit(boardCell.shipIndex);
+			boardCell.hit = true;
 		}
 	}
 

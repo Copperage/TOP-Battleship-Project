@@ -8,12 +8,7 @@ class Ship {
 	}
 
 	hit(position) {
-		if (!this.hits[position]) {
-			this.hits[position] = true;
-			console.log(`Ship ${this.name} hit at position ${position}`);
-		} else {
-			console.log(`Ship ${this.name} already hit at position ${position}`);
-		}
+		this.hits[position] = true;
 	}
 
 	isShipSunk() {

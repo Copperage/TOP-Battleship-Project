@@ -30,9 +30,10 @@ test('You can place ships on the gameboard', () => {
 		[2, 2],
 		[2, 3],
 	]);
-	expect(board.ships).toContainEqual(
-		expect.objectContaining({ name: 'Destroyer' })
-	);
+
+	expect(board.board[2][1].shipName).toBe(newShip);
+	expect(board.board[2][2].shipName).toBe(newShip);
+	expect(board.board[2][3].shipName).toBe(newShip);
 });
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
@@ -40,37 +41,38 @@ test('Using the coordinates, determine if a ship gets hit or not on the gameboar
 	board.placeShip(newShip, 2, 1);
 
 	board.receiveAttack(2, 1);
+	board.receiveAttack(2, 0);
 
+	expect(board.board[2][0]).toBe(null);
 	expect(newShip.hits[0]).toBe(true);
 });
 
-// test('Check if the ship is rehitting the same area', () => {
-// 	let newShip = new Ship('Destroyer', 3);
-// 	board.placeShip(newShip, 2, 1);
+test('Track missed shots so they can be displayed on the gameboard DOM', () => {
+	let newShip = new Ship('Destroyer', 3);
+	board.placeShip(newShip, 2, 1);
 
-// 	board.receiveAttack([2, 1]);
-// 	board.receiveAttack([2, 1]);
+	board.receiveAttack(2, 0);
+	board.receiveAttack(3, 0);
 
-// 	expect(newShip.hits).toBe(1);
-// });
+	expect(board.missedShotsTracker()).toEqual([
+		{ x: 2, y: 0 },
+		{ x: 3, y: 0 },
+	]);
+});
 
-// test('Track missed shots so they can be displayed on the gameboard DOM', () => {
-// 	let newShip = new Ship('Destroyer', 3);
-// 	board.placeShip(newShip, 2, 1);
+test('Check if all ships are sunk to end the game', () => {
+	let ship1 = new Ship('Destroyer', 3);
+	let ship2 = new Ship('Submarine', 3);
 
-// 	board.receiveAttack([2, 0]);
+	board.placeShip(ship1, 2, 1);
+	board.placeShip(ship2, 3, 1);
 
-// 	expect(board.missedShotsTracker[2][0]).toContainEqual({ x: 2, y: 0 });
-// });
+	board.receiveAttack(2, 1);
+	board.receiveAttack(2, 2);
+	board.receiveAttack(2, 3);
+	board.receiveAttack(3, 1);
+	board.receiveAttack(3, 2);
+	board.receiveAttack(3, 3);
 
-// test('Check if all ships are sunk to end the game', () => {
-// 	let ship1 = new Ship('Destroyer', 3);
-// 	let ship2 = new Ship('Submarine', 3);
-// 	let ship3 = new Ship('Battleship', 4);
-
-// 	board.placeShip(ship1, 0, 0);
-// 	board.placeShip(ship2, 0, 1);
-// 	board.placeShip(ship3, 0, 2);
-
-// 	expect(board.allSunk()).toBe(true);
-// });
+	expect(board.allSunk()).toBe(true);
+});

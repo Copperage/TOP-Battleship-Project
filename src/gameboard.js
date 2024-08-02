@@ -7,16 +7,16 @@ class gameBoard {
 		this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
 	}
 	// visualization:
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
-	//[x, x, x, x, x, x, x, x, x, x]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
 
 	placeShip(ship, x, y) {
 		ship.position = [];
@@ -28,12 +28,15 @@ class gameBoard {
 		this.ships.push(ship);
 	}
 
-	recieveAttack([x, y]) {
-		const boardCell = this.board[x][y];
-		if (boardCell === null) {
+	receiveAttack(x, y) {
+		if (this.board[x][y] === null) {
 			this.missedShots.push({ x: x, y: y });
-		} else if (boardCell instanceof Ship) {
-			boardCell.hit();
+		} else {
+				const shipIndex = this.board[y][x].shipIndex;
+				const ship = this.ships.find((ship) => ship.shipIndex === shipIndex);
+				
+				ship.hit(shipIndex);
+			  }
 		}
 	}
 

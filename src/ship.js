@@ -2,17 +2,22 @@ class Ship {
 	constructor(shipName, shipLength) {
 		this.name = shipName;
 		this.length = shipLength;
-		this.hits = 0;
+		this.hits = Array(shipLength).fill(false);
 		this.shipSunk = false;
+		this.position = [];
 	}
 
-	hit() {
-		this.hits++;
+	hit(position) {
+		if (!this.hits[position]) {
+			this.hits[position] = true;
+			console.log(`Ship ${this.name} hit at position ${position}`);
+		} else {
+			console.log(`Ship ${this.name} already hit at position ${position}`);
+		}
 	}
 
 	isShipSunk() {
-		this.shipSunk = this.hits >= this.length;
-		return this.shipSunk;
+		return this.hits.every((hit) => hit === true);
 	}
 }
 

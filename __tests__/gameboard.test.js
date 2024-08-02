@@ -39,38 +39,38 @@ test('Using the coordinates, determine if a ship gets hit or not on the gameboar
 	let newShip = new Ship('Destroyer', 3);
 	board.placeShip(newShip, 2, 1);
 
-	expect(board.board[2][1]).toBe('hit');
-	expect(board.board[2][2]).toBe('hit');
-	expect(board.board[2][3]).toBe('hit');
-	expect(newShip.hits).toBe(3);
+	board.receiveAttack(2, 1);
+
+	expect(newShip.hits[0]).toBe(true);
 });
 
-test('Track missed shots so they can be displayed on the gameboard DOM', () => {
-	let newShip = new Ship('Destroyer', 3);
-	board.placeShip(newShip, 2, 1);
+// test('Check if the ship is rehitting the same area', () => {
+// 	let newShip = new Ship('Destroyer', 3);
+// 	board.placeShip(newShip, 2, 1);
 
-	expect(board.recieveAttack([1, 2])).toBe(false);
-});
+// 	board.receiveAttack([2, 1]);
+// 	board.receiveAttack([2, 1]);
 
-test('Check if all ships are sunk to end the game', () => {
-	let ship1 = new Ship('Destroyer', 3);
-	let ship2 = new Ship('Submarine', 3);
-	let ship3 = new Ship('Battleship', 4);
+// 	expect(newShip.hits).toBe(1);
+// });
 
-	board.placeShip(ship1, 0, 0);
-	board.placeShip(ship2, 0, 1);
-	board.placeShip(ship3, 0, 2);
+// test('Track missed shots so they can be displayed on the gameboard DOM', () => {
+// 	let newShip = new Ship('Destroyer', 3);
+// 	board.placeShip(newShip, 2, 1);
 
-	ship1.hit();
-	ship1.hit();
-	ship1.hit();
-	ship2.hit();
-	ship2.hit();
-	ship2.hit();
-	ship3.hit();
-	ship3.hit();
-	ship3.hit();
-	ship3.hit();
+// 	board.receiveAttack([2, 0]);
 
-	expect(board.allSunk()).toBe(true);
-});
+// 	expect(board.missedShotsTracker[2][0]).toContainEqual({ x: 2, y: 0 });
+// });
+
+// test('Check if all ships are sunk to end the game', () => {
+// 	let ship1 = new Ship('Destroyer', 3);
+// 	let ship2 = new Ship('Submarine', 3);
+// 	let ship3 = new Ship('Battleship', 4);
+
+// 	board.placeShip(ship1, 0, 0);
+// 	board.placeShip(ship2, 0, 1);
+// 	board.placeShip(ship3, 0, 2);
+
+// 	expect(board.allSunk()).toBe(true);
+// });

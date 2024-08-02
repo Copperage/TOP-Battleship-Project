@@ -3,7 +3,7 @@ import Ship from '../src/ship';
 
 let board;
 
-// Board tests
+// Board Init
 
 beforeEach(() => {
 	board = new gameBoard();
@@ -39,13 +39,18 @@ test('Using the coordinates, determine if a ship gets hit or not on the gameboar
 	let newShip = new Ship('Destroyer', 3);
 	board.placeShip(newShip, 2, 1);
 
-	expect(board.recieveAttack([2, 1])).toBe(true);
-	expect(newShip.hits).toBe(1);
+	expect(board.board[2][1]).toBe('hit');
+	expect(board.board[2][2]).toBe('hit');
+	expect(board.board[2][3]).toBe('hit');
+	expect(newShip.hits).toBe(3);
 });
 
-// test('Track missed shots so they can be displayed on the gameboard DOM', () => {
-// 	expect();
-// });
+test('Track missed shots so they can be displayed on the gameboard DOM', () => {
+	let newShip = new Ship('Destroyer', 3);
+	board.placeShip(newShip, 2, 1);
+
+	expect(board.recieveAttack([1, 2])).toBe(false);
+});
 
 test('Check if all ships are sunk to end the game', () => {
 	let ship1 = new Ship('Destroyer', 3);

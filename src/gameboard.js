@@ -3,6 +3,7 @@ import Ship from './ship.js';
 class gameBoard {
 	constructor() {
 		this.ships = [];
+		this.missedShots = [];
 		this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
 	}
 	// visualization:
@@ -30,12 +31,14 @@ class gameBoard {
 	recieveAttack([x, y]) {
 		const boardCell = this.board[x][y];
 		if (boardCell === null) {
-			return false;
+			this.missedShots.push({ x: x, y: y });
 		} else if (boardCell instanceof Ship) {
 			boardCell.hit();
-			return true;
 		}
-		return false;
+	}
+
+	missedShotsTracker() {
+		return this.missedShots;
 	}
 
 	allSunk() {

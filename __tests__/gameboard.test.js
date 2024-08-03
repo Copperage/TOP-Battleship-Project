@@ -1,4 +1,4 @@
-import gameBoard from '../src/gameboard';
+import GameBoard from '../src/gameboard';
 import Ship from '../src/ship';
 
 let board;
@@ -6,7 +6,7 @@ let board;
 // Board Init
 
 beforeEach(() => {
-	board = new gameBoard();
+	board = new GameBoard();
 });
 
 test('Gameboard is a grid', () => {
@@ -36,6 +36,18 @@ test('You can place ships on the gameboard', () => {
 	expect(board.board[2][3].shipName).toBe(newShip);
 });
 
+test('You cant place a ship in an invalid location/outside of the board', () => {
+	let newShip = new Ship('Destroyer', 3);
+
+	board.placeShip(newShip, 11, 1);
+
+	for (let i = 0; i < 10; i++) {
+		for (let j = 0; j < 10; j++) {
+			expect(board.board[i][j]).toBe(null);
+		}
+	}
+});
+
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {
 	let newShip = new Ship('Destroyer', 3);
 	board.placeShip(newShip, 2, 1);
@@ -54,7 +66,7 @@ test('Track missed shots so they can be displayed on the gameboard DOM', () => {
 	board.receiveAttack(2, 0);
 	board.receiveAttack(3, 0);
 
-	expect(board.missedShotsTracker()).toEqual([
+	expect(board.getMissedShots()).toEqual([
 		{ x: 2, y: 0 },
 		{ x: 3, y: 0 },
 	]);

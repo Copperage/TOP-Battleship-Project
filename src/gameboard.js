@@ -1,39 +1,45 @@
 import Ship from './ship.js';
 
-class gameBoard {
+class GameBoard {
 	constructor() {
 		this.missedShots = [];
 		this.ships = [];
-		this.board = Array.from({ length: 10 }, () =>
-			Array.from({ length: 10 }, () => null)
-		);
+		this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
 	}
 
 	// visualization:
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
-	//[{ shipName: null, hit: false }, ..., { shipName: null, hit: false }]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+	//[null, null, null, null, null, null, null, null, null, null]
+
+	checkIfValidCell(length, x, y) {
+		if (x < 0 || x >= 10 || y < 0 || y >= 10 || y + length > 10) {
+			return false;
+		}
+		return true;
+	}
 
 	placeShip(ship, x, y) {
 		ship.position = [];
 
-		for (let i = 0; i < ship.length; i++) {
-			this.board[x][y + i] = {
-				shipName: ship,
-				shipIndex: i,
-				hit: false,
-			};
-
-			ship.position.push([x, y + i]);
+		if (this.checkIfValidCell(ship.length, x, y)) {
+			for (let i = 0; i < ship.length; i++) {
+				this.board[x][y + i] = {
+					shipName: ship,
+					shipIndex: i,
+					hit: false,
+				};
+				ship.position.push([x, y + i]);
+			}
+			this.ships.push(ship);
 		}
-		this.ships.push(ship);
 	}
 
 	receiveAttack(x, y) {
@@ -47,7 +53,7 @@ class gameBoard {
 		}
 	}
 
-	missedShotsTracker() {
+	getMissedShots() {
 		return this.missedShots;
 	}
 
@@ -56,4 +62,4 @@ class gameBoard {
 	}
 }
 
-export default gameBoard;
+export default GameBoard;

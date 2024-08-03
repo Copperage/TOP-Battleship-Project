@@ -1,4 +1,4 @@
-class Ship {
+export default class Ship {
 	constructor(shipName, shipLength) {
 		this.name = shipName;
 		this.length = shipLength;
@@ -15,5 +15,3 @@ class Ship {
 		return this.hits.every((hit) => hit === true);
 	}
 }
-
-export default Ship;

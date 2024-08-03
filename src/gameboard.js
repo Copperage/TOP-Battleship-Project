@@ -1,6 +1,6 @@
 import Ship from './ship.js';
 
-class GameBoard {
+export default class GameBoard {
 	constructor() {
 		this.missedShots = [];
 		this.ships = [];
@@ -61,5 +61,3 @@ class GameBoard {
 		return this.ships.every((ship) => ship.isShipSunk());
 	}
 }
-
-export default GameBoard;

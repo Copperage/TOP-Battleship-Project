@@ -17,9 +17,13 @@ export default class Player {
 		}
 	}
 
-	attack(x, y, player2, player2Board) {
-		if (this.isTurn === true) {
-			player2Board.receiveAttack(x, y);
+	checkturn() {
+		return this.isTurn;
+	}
+
+	attack(x, y, player2, enemyBoard) {
+		if (this.checkturn()) {
+			enemyBoard.receiveAttack(x, y);
 			this.endTurn(player2);
 		}
 	}

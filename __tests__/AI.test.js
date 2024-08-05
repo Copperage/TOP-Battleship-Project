@@ -10,13 +10,26 @@ test('AI has a name and doesnt start the game with a turn', () => {
 });
 
 test('AI attacks when it starts a turn', () => {
-	let player = new Player('Player 1');
-	let ai = new Computer('Player 2');
 	let board = new GameBoard();
-	let board2 = new GameBoard();
+	let enemyBoard = new GameBoard();
+	let player = new Player('Player 1');
+	let ai = new Computer('Player 2', player, board);
 
-	player.attack(2, 1, ai, board2);
+	player.attack(2, 1, ai, enemyBoard);
 	ai.randomAttack();
 
-	expect(ai.attackArray().length).toBe(1);
+	expect(ai.getAttackArray().length).toBe(1);
+	expect(enemyBoard.getMissedShots().length).toBe(1);
+});
+
+test('AI records its attack coords', () => {
+	let board = new GameBoard();
+	let enemyBoard = new GameBoard();
+	let player = new Player('Player 1');
+	let ai = new Computer('Player 2', player, board);
+
+	player.attack(2, 1, ai, enemyBoard);
+	ai.randomAttack();
+
+	expect(ai.attackArray.length).toBe(1);
 });

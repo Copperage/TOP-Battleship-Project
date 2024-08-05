@@ -18,6 +18,7 @@ export default class Computer extends Player {
 			let storeObj = { x: undefined, y: undefined };
 
 			while (true) {
+				// if checkturn is true
 				let randomX = Math.floor(Math.random() * 10);
 				let randomY = Math.floor(Math.random() * 10);
 

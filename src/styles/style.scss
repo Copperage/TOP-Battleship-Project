@@ -1,0 +1,49 @@
+*,
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+}
+
+body {
+	display: inline-block;
+}
+
+.header {
+	width: 100vw;
+	height: 80px;
+	font-size: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+	height: 91.4vh;
+}
+
+// Player Side/Left Side
+
+.player-side {
+	width: 100vw;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+}
+
+.player-board {
+	margin-top: 30px;
+	width: 600px;
+	height: 600px;
+	background-color: aqua;
+}
+
+// Computer Side/Right side
+.computer-side {
+	width: 100vw;
+	border: 1px solid black;
+}

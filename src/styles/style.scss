@@ -26,24 +26,29 @@ body {
 	height: 91.4vh;
 }
 
-// Player Side/Left Side
-
-.player-side {
+.player-side,
+.computer-side {
 	width: 100vw;
 	border: 1px solid black;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 }
 
-.player-board {
+.player-board,
+.computer-board {
+	margin: auto;
 	margin-top: 30px;
 	width: 600px;
 	height: 600px;
-	background-color: aqua;
+	border: 1px solid black;
 }
 
-// Computer Side/Right side
-.computer-side {
-	width: 100vw;
+.player-ships {
+	width: 800px;
+	height: 200px;
+	margin: auto;
+	margin-top: -25px;
+	bottom: 0;
 	border: 1px solid black;
 }

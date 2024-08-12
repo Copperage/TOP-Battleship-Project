@@ -12,11 +12,47 @@
 		<div class="content">
 			<div class="player-side">
 				<div class="player-board"></div>
-				<div class="player-ships"></div>
 			</div>
 			<div class="computer-side">
-				<div class="computer-board"></div>
+				<div class="computer-board hidden"></div>
+				<div class="player-ships">
+					<div class="ship carrier" draggable="true">
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+					</div>
+					<div class="ship battleship" draggable="true">
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+					</div>
+					<div class="ship destroyer" draggable="true">
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+					</div>
+					<div class="ship submarine" draggable="true">
+						<div class="block"></div>
+						<div class="block"></div>
+						<div class="block"></div>
+					</div>
+					<div class="ship patrol-boat" draggable="true">
+						<div class="block"></div>
+						<div class="block"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
 </html>
+
+<!--
+	let carrier = new Ship('Carrier', 5);
+	let battleship = new Ship('Battleship', 4);
+	let destroyer = new Ship('Destroyer', 3);
+	let submarine = new Ship('Submarine', 3);
+	let patrolBoat = new Ship('Patrol Boat', 2);
+-->

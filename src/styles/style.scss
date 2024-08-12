@@ -23,45 +23,69 @@ body {
 	display: flex;
 	flex-direction: row;
 	width: 100vw;
-	height: 91.4vh;
+	height: 91.7vh;
 }
 
 .player-side,
 .computer-side {
-	width: 100vw;
+	width: 50vw;
 	border: 1px solid black;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
+	align-items: center;
 }
 
 .player-board,
 .computer-board {
 	margin: auto;
-	margin-top: 30px;
-	width: 30vw;
-	height: 60vh;
+	width: 35vw;
+	height: 65vh;
 	border: 1px solid black;
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	grid-template-rows: repeat(10, 1fr);
 }
 
+.hidden {
+	display: none;
+}
+
 .player-ships {
-	width: 800px;
-	height: 200px;
 	margin: auto;
-	margin-top: -20px;
+	width: 30vw;
+	height: 60vh;
 	bottom: 0;
 	border: 1px solid black;
 	border-radius: 10px;
+	display: flex;
+	gap: 50px;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
-.cell {
+.cell,
+.block {
+	display: flex;
 	background-color: #eee;
 	border: 1px solid black;
 
 	&:hover {
 		background-color: #dadada;
 	}
+}
+
+.ship {
+	display: flex;
+}
+
+.battleship,
+.submarine {
+	flex-direction: column;
+}
+
+.block {
+	width: 60px;
+	height: 60px;
 }

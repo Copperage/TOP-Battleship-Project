@@ -47,10 +47,6 @@ body {
 	grid-template-rows: repeat(10, 1fr);
 }
 
-.hidden {
-	display: none;
-}
-
 .player-ships {
 	margin: auto;
 	width: 30vw;
@@ -72,7 +68,7 @@ body {
 	border: 1px solid black;
 
 	&:hover {
-		background-color: #dadada;
+		background-color: #ddd;
 	}
 }
 
@@ -85,7 +81,20 @@ body {
 	flex-direction: column;
 }
 
+.block,
+.ship {
+	background-color: #da0000;
+
+	&:hover {
+		background-color: #b30000;
+	}
+}
+
 .block {
 	width: 60px;
 	height: 60px;
+}
+
+.hidden {
+	display: none;
 }

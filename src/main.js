@@ -5,9 +5,11 @@ import Player from './player.js';
 import Computer from './AI.js';
 
 // Query Selection
-const playerBoardDOM = document.querySelector('.player-board');
-const computerBoardDOM = document.querySelector('.computer-board');
-const playerShipsDOM = document.querySelector('.player-ships');
+const carrierDOM = document.querySelector('.carrier');
+const battleshipDOM = document.querySelector('.battleship');
+const destroyerDOM = document.querySelector('.destroyer');
+const submarineDOM = document.querySelector('.submarine');
+const patrolBoatDOM = document.querySelector('.patrol-boat');
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Board
@@ -32,11 +34,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	let aiSubmarine = new Ship('Submarine', 3);
 	let aiPatrolBoat = new Ship('Patrol Boat', 2);
 
-	displayBoard('player-board');
-	displayBoard('computer-board');
+	playerBoard.placeShip(carrier, 0, 2);
+	playerBoard.placeShip(battleship, 2, 1);
+	playerBoard.placeShip(destroyer, 3, 6);
+	playerBoard.placeShip(submarine, 6, 2);
+	playerBoard.placeShip(patrolBoat, 8, 6);
+
+	enemyBoard.placeShip(aiCarrier, 0, 5);
+	enemyBoard.placeShip(aiBattleship, 2, 2);
+	enemyBoard.placeShip(aiDestroyer, 4, 1);
+	enemyBoard.placeShip(aiSubmarine, 6, 2);
+	enemyBoard.placeShip(aiPatrolBoat, 8, 4);
+
+	// dragShips(carrierDOM);
+	// dragShips(battleshipDOM);
+	// dragShips(destroyerDOM);
+	// dragShips(submarineDOM);
+	// dragShips(patrolBoatDOM);
+
+	displayBoard('player-board', playerBoard);
+	displayBoard('computer-board', enemyBoard);
 });
 
-function displayBoard(boardName) {
+function displayBoard(boardName, boardObj) {
 	let board = document.querySelector(`.${boardName}`);
 
 	for (let i = 0; i < 10; i++) {
@@ -46,18 +66,27 @@ function displayBoard(boardName) {
 			cell.setAttribute('data-x', i);
 			cell.setAttribute('data-y', j);
 
+			if (boardObj.board[i][j] !== null) {
+				cell.classList.add('ship');
+			}
+
 			board.appendChild(cell);
 		}
 	}
 }
 
-function dragShips(element) {
-	element.addEventListener('drag', (e) => {
-		e.dataTransfer.setData('text/plain', e.target.className);
-	});
-}
+// function dragShips(element) {
+// 	element.addEventListener('dragstart', (e) => {
+// 		e.dataTransfer.setData('text/plain', e.target.className);
+// 	});
+// }
 
-// get board displayed - done
-// add ships - done
-// let you drag ships to board
-// update display so that dragged ships are recorded
+/*
+	get board displayed - done
+	add ships - done
+	add ships to enemy board - done
+	make enemy board clickable and record the attack
+	make sure enemy attacks randomly
+	let you drag ships to board
+	update display so that dragged ships are recorded
+*/

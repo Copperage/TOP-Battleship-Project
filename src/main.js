@@ -54,10 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	displayBoard('player-board', playerBoard);
 	displayBoard('computer-board', enemyBoard);
+	updateBoard('player-board', playerBoard);
+	updateBoard('computer-board', enemyBoard);
 });
 
 function displayBoard(boardName, boardObj) {
 	let board = document.querySelector(`.${boardName}`);
+	let boardArray = boardObj.getBoard();
 
 	for (let i = 0; i < 10; i++) {
 		for (let j = 0; j < 10; j++) {
@@ -66,7 +69,7 @@ function displayBoard(boardName, boardObj) {
 			cell.setAttribute('data-x', i);
 			cell.setAttribute('data-y', j);
 
-			if (boardObj.board[i][j] !== null) {
+			if (boardArray[i][j] !== null) {
 				cell.classList.add('ship');
 			}
 
@@ -75,11 +78,46 @@ function displayBoard(boardName, boardObj) {
 	}
 }
 
-// function dragShips(element) {
-// 	element.addEventListener('dragstart', (e) => {
-// 		e.dataTransfer.setData('text/plain', e.target.className);
-// 	});
-// }
+function updateBoard(boardName, boardObj) {
+	let boardArray = boardObj.getBoard();
+	let missedShots = boardObj.getMissedShots();
+
+	// Iterate over all cells on the board
+	boardArray.forEach((row, x) => {
+		row.forEach((cell, y) => {
+			// Null check + If the cell contains a ship
+			if (cell !== null && cell.shipName) {
+				// If the ship has been hit at this cell
+				if (cell.shipName.hit(cell.shipIndex)) {
+					let selectedCell = document.querySelector(
+						// Select the board name and the current x and y datasets
+						`.${boardName} [data-x="${x}"][data-y="${y}"]`
+					);
+
+					selectedCell.classList.remove('ship');
+					selectedCell.classList.add('hit');
+				} else {
+					// If player's board and the cell has not been hit
+					if (boardName === 'playerBoard') {
+						let selectedCell = document.querySelector(
+							`.${boardName} [data-x="${x}"][data-y="${y}"]`
+						);
+
+						selectedCell.classList.add('ship');
+					}
+				}
+			}
+		});
+	});
+
+	missedShots.forEach((attack) => {
+		let selectedCell = document.querySelector(
+			`.${boardName} [data-x="${attack.x}"][data-y="${attack.y}"]`
+		);
+
+		selectedCell.classList.add('missed');
+	});
+}
 
 /*
 	get board displayed - done

@@ -9,6 +9,7 @@ export default class Ship {
 
 	hit(position) {
 		this.hits[position] = true;
+		return true;
 	}
 
 	isShipSunk() {

@@ -19,6 +19,10 @@ export default class GameBoard {
 	//[null, null, null, null, null, null, null, null, null, null]
 	//[null, null, null, null, null, null, null, null, null, null]
 
+	getBoard() {
+		return this.board;
+	}
+
 	checkIfValidCell(length, x, y) {
 		if (x < 0 || x >= 10 || y < 0 || y >= 10 || y + length > 10) {
 			return false;

@@ -83,16 +83,24 @@ body {
 
 .block,
 .ship {
-	background-color: #da0000;
+	background-color: #0059ff;
 
 	&:hover {
-		background-color: #b30000;
+		background-color: #0047cc;
 	}
 }
 
 .block {
 	width: 60px;
 	height: 60px;
+}
+
+.hit {
+	background-color: #b90000 !important;
+}
+
+.miss {
+	background-color: #2b2b2b !important;
 }
 
 .hidden {

@@ -14,7 +14,7 @@ export default class Computer extends Player {
 	}
 
 	randomAttack() {
-		if (this.checkturn()) {
+		if (this.checkTurn()) {
 			let storeObj = { x: undefined, y: undefined };
 
 			while (true) {

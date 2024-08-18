@@ -5,6 +5,7 @@ export default class GameBoard {
 		this.missedShots = [];
 		this.ships = [];
 		this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
+		this.attackedCells = new Set();
 	}
 
 	// visualization:
@@ -49,11 +50,20 @@ export default class GameBoard {
 	receiveAttack(x, y) {
 		let boardCell = this.board[x][y];
 
+		// Using a set to track if the hit is a duplicate
+		if (this.attackedCells.has(`${x}, ${y}`)) {
+			return false; // Return false because it's already been attacked
+		}
+		this.attackedCells.add(`${x}, ${y}`); // Add the coordinates to the set for tracking
+
+		// If cell is empty then it's a miss
 		if (boardCell === null) {
 			this.missedShots.push({ x, y });
+			return true; // Return true because an attack was done
 		} else {
+			// Else its a hit
 			boardCell.shipName.hit(boardCell.shipIndex);
-			boardCell.hit = true;
+			return true;
 		}
 	}
 

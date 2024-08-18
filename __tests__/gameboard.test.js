@@ -59,6 +59,16 @@ test('Using the coordinates, determine if a ship gets hit or not on the gameboar
 	expect(newShip.hits[0]).toBe(true);
 });
 
+test('Attacking cell multiple times returns false', () => {
+	expect(board.receiveAttack(4, 4)).toBe(true);
+	expect(board.getMissedShots()).toContainEqual({ x: 4, y: 4 });
+
+	expect(board.receiveAttack(4, 4)).toBe(false);
+
+	expect(board.getMissedShots().length).toBe(1);
+	expect(board.getMissedShots()).toContainEqual({ x: 4, y: 4 });
+});
+
 test('Track missed shots so they can be displayed on the gameboard DOM', () => {
 	let newShip = new Ship('Destroyer', 3);
 	board.placeShip(newShip, 2, 1);

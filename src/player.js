@@ -17,14 +17,16 @@ export default class Player {
 		}
 	}
 
-	checkturn() {
+	checkTurn() {
 		return this.isTurn;
 	}
 
 	attack(x, y, player2, enemyBoard) {
-		if (this.checkturn()) {
-			enemyBoard.receiveAttack(x, y);
+		if (this.checkTurn()) {
+			let result = enemyBoard.receiveAttack(x, y);
 			this.endTurn(player2);
+			return result;
 		}
+		return false;
 	}
 }

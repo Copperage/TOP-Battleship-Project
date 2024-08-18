@@ -88,7 +88,7 @@ function updateBoard(boardName, boardObj) {
 			// Null check + If the cell contains a ship
 			if (cell !== null && cell.shipName) {
 				// If the ship has been hit at this cell
-				if (cell.shipName.hit(cell.shipIndex)) {
+				if (cell.shipName.hits[cell.shipIndex] === true) {
 					let selectedCell = document.querySelector(
 						// Select the board name and the current x and y datasets
 						`.${boardName} [data-x="${x}"][data-y="${y}"]`
@@ -102,7 +102,7 @@ function updateBoard(boardName, boardObj) {
 						let selectedCell = document.querySelector(
 							`.${boardName} [data-x="${x}"][data-y="${y}"]`
 						);
-
+						selectedCell.classList.remove('hit');
 						selectedCell.classList.add('ship');
 					}
 				}
@@ -118,6 +118,37 @@ function updateBoard(boardName, boardObj) {
 		selectedCell.classList.add('missed');
 	});
 }
+
+// function dragShips(element) {
+// 	element.addEventListener('dragstart', (e) => {
+// 		e.dataTransfer.setData('text/plain', e.target.className);
+// 	});
+// }
+
+// function dropShip(e) {
+// 	// get the class name of the ship that was dropped
+// 	let data = e.dataTransfer.getData('text');
+// 	// get coords
+// 	let x = parseInt(e.target.getAttribute('data-x'));
+// 	let y = parseInt(e.target.getAttribute('data-y'));
+
+// 	switch (data) {
+// 		case 'carrier':
+// 			// Check if the ship can be placed at the specified coordinates
+// 			if (playerBoard.checkIfValidCell(carrier.length, x, y)) {
+// 				// If it can be placed, place the ship
+// 				playerBoard.placeShip(carrier, x, y);
+
+// 				// Display the updated board
+// 				displayBoard('player-board', playerBoard);
+
+// 				// Remove the ship from the list of available ships to place
+// 				let ship = document.querySelector(`#${data}`);
+// 				addShips.removeChild(ship);
+// 			}
+// 			break;
+// 	}
+// }
 
 /*
 	get board displayed - done

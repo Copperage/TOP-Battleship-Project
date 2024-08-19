@@ -20,32 +20,34 @@ test('Gameboard is 10x10', () => {
 
 // Place Ships tests
 
-test('You can place ships on the gameboard', () => {
-	let newShip = new Ship('Destroyer', 3);
+describe('checkIfValidCell & placeShip', () => {
+	test('You can place ships on the gameboard', () => {
+		let newShip = new Ship('Destroyer', 3);
 
-	board.placeShip(newShip, 2, 1);
+		board.placeShip(newShip, 2, 1);
 
-	expect(newShip.position).toEqual([
-		[2, 1],
-		[2, 2],
-		[2, 3],
-	]);
+		expect(newShip.position).toEqual([
+			[2, 1],
+			[2, 2],
+			[2, 3],
+		]);
 
-	expect(board.board[2][1].shipName).toBe(newShip);
-	expect(board.board[2][2].shipName).toBe(newShip);
-	expect(board.board[2][3].shipName).toBe(newShip);
-});
+		expect(board.board[2][1].shipName).toBe(newShip);
+		expect(board.board[2][2].shipName).toBe(newShip);
+		expect(board.board[2][3].shipName).toBe(newShip);
+	});
 
-test('You cant place a ship in an invalid location/outside of the board', () => {
-	let newShip = new Ship('Destroyer', 3);
+	test('Cant place ship outside of the board', () => {
+		let result = board.checkIfValidCell(4, 0, 7, true);
+		expect(result).toBe(false);
+	});
 
-	board.placeShip(newShip, 11, 1);
-
-	for (let i = 0; i < 10; i++) {
-		for (let j = 0; j < 10; j++) {
-			expect(board.board[i][j]).toBe(null);
-		}
-	}
+	test('Cant overlap two ships together', () => {
+		let newShip = new Ship('Destroyer', 3);
+		board.placeShip(newShip, 0, 0);
+		let result = board.checkIfValidCell(4, 0, 1, true);
+		expect(result).toBe(false);
+	});
 });
 
 test('Using the coordinates, determine if a ship gets hit or not on the gameboard', () => {

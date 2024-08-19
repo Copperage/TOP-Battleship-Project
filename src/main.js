@@ -39,11 +39,11 @@ playerBoard.placeShip(destroyer, 3, 6);
 playerBoard.placeShip(submarine, 6, 2);
 playerBoard.placeShip(patrolBoat, 8, 6);
 
-enemyBoard.placeShip(aiCarrier, 0, 5);
-enemyBoard.placeShip(aiBattleship, 2, 2);
-enemyBoard.placeShip(aiDestroyer, 4, 1);
-enemyBoard.placeShip(aiSubmarine, 6, 2);
-enemyBoard.placeShip(aiPatrolBoat, 8, 4);
+placeRandomAiShip(aiCarrier);
+placeRandomAiShip(aiBattleship);
+placeRandomAiShip(aiDestroyer);
+placeRandomAiShip(aiSubmarine);
+placeRandomAiShip(aiPatrolBoat);
 
 // dragShips(carrierDOM);
 // dragShips(battleshipDOM);
@@ -55,6 +55,21 @@ displayBoard('player-board', playerBoard);
 displayBoard('computer-board', enemyBoard);
 updateBoard('player-board', playerBoard);
 updateBoard('computer-board', enemyBoard);
+
+function placeRandomAiShip(ship) {
+	// take the ai ship variables and randomize their position between 0 and 10 on the grid
+	let placed = false;
+
+	while (!placed) {
+		let row = Math.floor(Math.random() * 10);
+		let column = Math.floor(Math.random() * 10);
+
+		if (enemyBoard.checkIfValidCell(ship.length, row, column)) {
+			enemyBoard.placeShip(ship, row, column);
+			placed = true;
+		}
+	}
+}
 
 function shipAttacks(element) {
 	let x = parseInt(element.getAttribute('data-x'));
@@ -168,7 +183,7 @@ function updateBoard(boardName, board) {
 	add ships to enemy board - done
 	make enemy board clickable and record the attack - done
 	make sure enemy attacks randomly - done
-	add random AI ships
+	add random AI ships - done
 	let you drag ships to board
 	update display so that dragged ships are recorded
 */

@@ -27,7 +27,12 @@ export default class GameBoard {
 	checkIfValidCell(length, x, y) {
 		if (x < 0 || x >= 10 || y < 0 || y >= 10 || y + length > 10) {
 			return false;
+		} else {
+			for (let i = 0; i < length; i++) {
+				if (this.board[x][y + i] !== null) return false;
+			}
 		}
+
 		return true;
 	}
 

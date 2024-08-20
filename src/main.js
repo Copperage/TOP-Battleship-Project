@@ -85,8 +85,18 @@ function shipAttacks(element) {
 	player.attack(x, y, computer, enemyBoard);
 	updateBoard('computer-board', enemyBoard);
 
+	if (enemyBoard.allSunk()) {
+		console.log('You win!');
+		return;
+	}
+
 	computer.randomAttack();
 	updateBoard('player-board', playerBoard);
+
+	if (playerBoard.allSunk()) {
+		console.log('You lose...');
+		return;
+	}
 }
 
 function displayBoard(boardName, boardObj) {
@@ -178,12 +188,15 @@ function updateBoard(boardName, board) {
 // }
 
 /*
+	TO DO LIST 
+	-----------------------------
 	get board displayed - done
 	add ships - done
 	add ships to enemy board - done
 	make enemy board clickable and record the attack - done
 	make sure enemy attacks randomly - done
 	add random AI ships - done
+	end game when either side ships are fully destroyed
 	let you drag ships to board
 	update display so that dragged ships are recorded
 */

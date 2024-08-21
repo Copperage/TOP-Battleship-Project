@@ -3,7 +3,7 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-	font-size: 100%;
+	font-size: 16px;
 }
 
 body {
@@ -103,6 +103,53 @@ body {
 	background-color: #2b2b2b !important;
 }
 
+.bg-blur {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	transition: 0.25s;
+}
+
+.game-over {
+	z-index: inherit;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 250px;
+	width: 500px;
+	background-color: rgba(30, 30, 30, 0.95);
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 3vh;
+
+	p {
+		color: #fff;
+		font-size: 2.5em;
+		font-weight: 900;
+	}
+
+	button {
+		padding: 15px 20px;
+		background-color: #b60000;
+		border-radius: 25px;
+		border: 0;
+		color: #fff;
+		font-size: 1.25em;
+	}
+}
+
 .hidden {
 	display: none;
+	transition: 0.25s;
 }

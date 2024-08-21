@@ -74,6 +74,7 @@ function placeRandomAiShip(ship) {
 function shipAttacks(element) {
 	let x = parseInt(element.getAttribute('data-x'));
 	let y = parseInt(element.getAttribute('data-y'));
+	let modal = document.querySelector('.bg-blur');
 
 	if (
 		element.classList.contains('hit') ||
@@ -86,16 +87,14 @@ function shipAttacks(element) {
 	updateBoard('computer-board', enemyBoard);
 
 	if (enemyBoard.allSunk()) {
-		console.log('You win!');
-		return;
+		modal.classList.remove('hidden');
 	}
 
 	computer.randomAttack();
 	updateBoard('player-board', playerBoard);
 
 	if (playerBoard.allSunk()) {
-		console.log('You lose...');
-		return;
+		modal.classList.remove('hidden');
 	}
 }
 
@@ -196,7 +195,8 @@ function updateBoard(boardName, board) {
 	make enemy board clickable and record the attack - done
 	make sure enemy attacks randomly - done
 	add random AI ships - done
-	end game when either side ships are fully destroyed
+	end game when either side ships are fully destroyed - done
+	add modal and reset game button
 	let you drag ships to board
 	update display so that dragged ships are recorded
 */

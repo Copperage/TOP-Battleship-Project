@@ -33,23 +33,23 @@ let aiDestroyer = new Ship('Destroyer', 3);
 let aiSubmarine = new Ship('Submarine', 3);
 let aiPatrolBoat = new Ship('Patrol Boat', 2);
 
-playerBoard.placeShip(carrier, 0, 2);
-playerBoard.placeShip(battleship, 2, 1);
-playerBoard.placeShip(destroyer, 3, 6);
-playerBoard.placeShip(submarine, 6, 2);
-playerBoard.placeShip(patrolBoat, 8, 6);
-
-placeRandomAiShip(aiCarrier);
-placeRandomAiShip(aiBattleship);
-placeRandomAiShip(aiDestroyer);
-placeRandomAiShip(aiSubmarine);
-placeRandomAiShip(aiPatrolBoat);
+// playerBoard.placeShip(carrier, 0, 2);
+// playerBoard.placeShip(battleship, 2, 1);
+// playerBoard.placeShip(destroyer, 3, 6);
+// playerBoard.placeShip(submarine, 6, 2);
+// playerBoard.placeShip(patrolBoat, 8, 6);
 
 // dragShips(carrierDOM);
 // dragShips(battleshipDOM);
 // dragShips(destroyerDOM);
 // dragShips(submarineDOM);
 // dragShips(patrolBoatDOM);
+
+placeRandomAiShip(aiCarrier);
+placeRandomAiShip(aiBattleship);
+placeRandomAiShip(aiDestroyer);
+placeRandomAiShip(aiSubmarine);
+placeRandomAiShip(aiPatrolBoat);
 
 displayBoard('player-board', playerBoard);
 displayBoard('computer-board', enemyBoard);
@@ -209,7 +209,7 @@ function updateBoard(boardName, board) {
 	make sure enemy attacks randomly - done
 	add random AI ships - done
 	end game when either side ships are fully destroyed - done
-	add modal and reset game button
+	add modal and reset game button - done
 	let you drag ships to board
 	update display so that dragged ships are recorded
 */

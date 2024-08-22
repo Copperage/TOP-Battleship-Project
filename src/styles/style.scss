@@ -1,9 +1,21 @@
+:root {
+	--border-color: #000;
+	--bg-color: #fff;
+	--cellbg-color: #eee;
+	--cellbg-hover: #ddd;
+	--ship-color: #0059ff;
+	--ship-hover: #0047cc;
+	--hit-color: #b90000;
+	--missed-color: #2b2b2b;
+}
+
 *,
 html,
 body {
 	margin: 0;
 	padding: 0;
 	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -13,7 +25,7 @@ body {
 .header {
 	width: 100vw;
 	height: 80px;
-	font-size: 32px;
+	font-size: 3rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,11 +41,9 @@ body {
 .player-side,
 .computer-side {
 	width: 50vw;
-	border: 1px solid black;
+	border: 1px solid var(--border-color);
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
 }
 
 .player-board,
@@ -41,34 +51,48 @@ body {
 	margin: auto;
 	width: 35vw;
 	height: 65vh;
-	border: 1px solid black;
+	border: 1px solid var(--border-color);
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	grid-template-rows: repeat(10, 1fr);
 }
 
 .player-ships {
+	display: grid;
 	margin: auto;
 	width: 30vw;
 	height: 60vh;
 	bottom: 0;
-	border: 1px solid black;
-	border-radius: 10px;
-	display: flex;
-	gap: 50px;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+	border: 1px solid var(--border-color);
+	border-radius: 15px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 0.1fr 1fr;
+	background-color: var(--cellbg-color);
+
+	.ships-div {
+		display: flex;
+		gap: 50px;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		border-top: 1px solid var(--border-color);
+		background-color: var(--bg-color);
+	}
+
+	h1 {
+		font-size: 1.75rem;
+		margin: auto;
+	}
 }
 
 .cell,
 .block {
 	display: flex;
-	background-color: #eee;
-	border: 1px solid black;
+	background-color: var(--cellbg-color);
+	border: 1px solid var(--border-color);
 
 	&:hover {
-		background-color: #ddd;
+		background-color: var(--cellbg-hover);
 	}
 }
 
@@ -76,31 +100,26 @@ body {
 	display: flex;
 }
 
-.battleship,
-.submarine {
-	flex-direction: column;
-}
-
 .block,
 .ship {
-	background-color: #0059ff;
+	background-color: var(--ship-color);
 
 	&:hover {
-		background-color: #0047cc;
+		background-color: var(--ship-hover);
 	}
 }
 
 .block {
-	width: 60px;
-	height: 60px;
+	width: 3.4vw;
+	height: 6.1vh;
 }
 
 .hit {
-	background-color: #b90000 !important;
+	background-color: var(--hit-color) !important;
 }
 
 .missed {
-	background-color: #2b2b2b !important;
+	background-color: var(--missed-color) !important;
 }
 
 .bg-blur {
@@ -133,17 +152,17 @@ body {
 	gap: 3vh;
 
 	p {
-		color: #fff;
+		color: var(--cellbg-color);
 		font-size: 2.5em;
 		font-weight: 900;
 	}
 
 	button {
 		padding: 15px 20px;
-		background-color: #b60000;
+		background-color: var(--hit-color);
 		border-radius: 25px;
 		border: 0;
-		color: #fff;
+		color: var(--cellbg-color);
 		font-size: 1.25em;
 		cursor: pointer;
 		transition: 0.25s;

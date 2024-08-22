@@ -5,11 +5,11 @@ import Player from './player.js';
 import Computer from './AI.js';
 
 // Query Selection
-const carrierDOM = document.querySelector('.carrier');
-const battleshipDOM = document.querySelector('.battleship');
-const destroyerDOM = document.querySelector('.destroyer');
-const submarineDOM = document.querySelector('.submarine');
-const patrolBoatDOM = document.querySelector('.patrol-boat');
+const carrierDOM = document.querySelector('#carrier');
+const battleshipDOM = document.querySelector('#battleship');
+const destroyerDOM = document.querySelector('#destroyer');
+const submarineDOM = document.querySelector('#submarine');
+const patrolBoatDOM = document.querySelector('#patrol-boat');
 
 // Board
 let playerBoard = new GameBoard();
@@ -39,11 +39,11 @@ let aiPatrolBoat = new Ship('Patrol Boat', 2);
 // playerBoard.placeShip(submarine, 6, 2);
 // playerBoard.placeShip(patrolBoat, 8, 6);
 
-// dragShips(carrierDOM);
-// dragShips(battleshipDOM);
-// dragShips(destroyerDOM);
-// dragShips(submarineDOM);
-// dragShips(patrolBoatDOM);
+dragShips(carrierDOM);
+dragShips(battleshipDOM);
+dragShips(destroyerDOM);
+dragShips(submarineDOM);
+dragShips(patrolBoatDOM);
 
 placeRandomAiShip(aiCarrier);
 placeRandomAiShip(aiBattleship);
@@ -130,6 +130,11 @@ function displayBoard(boardName, boardObj) {
 				cell.addEventListener('click', (e) => {
 					shipAttacks(e.target);
 				});
+			} else if (boardName === 'player-board') {
+				cell.addEventListener('dragover', (e) => {
+					e.preventDefault();
+				});
+				cell.addEventListener('drop', dropShip);
 			}
 
 			board.appendChild(cell);
@@ -168,36 +173,54 @@ function updateBoard(boardName, board) {
 	});
 }
 
-// function dragShips(element) {
-// 	element.addEventListener('dragstart', (e) => {
-// 		e.dataTransfer.setData('text/plain', e.target.className);
-// 	});
-// }
+function dragShips(element) {
+	element.addEventListener('dragstart', (e) => {
+		e.dataTransfer.setData('text/plain', e.target.id);
+	});
+}
 
-// function dropShip(e) {
-// 	// get the class name of the ship that was dropped
-// 	let data = e.dataTransfer.getData('text');
-// 	// get coords
-// 	let x = parseInt(e.target.getAttribute('data-x'));
-// 	let y = parseInt(e.target.getAttribute('data-y'));
+function dropShip(e) {
+	e.preventDefault();
+	// get the class name of the ship that was dropped
+	let data = e.dataTransfer.getData('text');
+	// get coords
+	let x = parseInt(e.target.getAttribute('data-x'));
+	let y = parseInt(e.target.getAttribute('data-y'));
 
-// 	switch (data) {
-// 		case 'carrier':
-// 			// Check if the ship can be placed at the specified coordinates
-// 			if (playerBoard.checkIfValidCell(carrier.length, x, y)) {
-// 				// If it can be placed, place the ship
-// 				playerBoard.placeShip(carrier, x, y);
+	switch (data) {
+		case 'carrier':
+			playerShipDrag(carrier, x, y);
+			break;
+		case 'battleship':
+			playerShipDrag(battleship, x, y);
+			break;
+		case 'destroyer':
+			playerShipDrag(destroyer, x, y);
+			break;
+		case 'submarine':
+			playerShipDrag(submarine, x, y);
+			break;
+		case 'patrol-boat':
+			playerShipDrag(patrolBoat, x, y);
+			break;
+	}
+}
 
-// 				// Display the updated board
-// 				displayBoard('player-board', playerBoard);
+function playerShipDrag(ship, x, y) {
+	if (playerBoard.checkIfValidCell(ship.length, x, y)) {
+		playerBoard.placeShip(ship, x, y);
+		updateBoard('player-board', playerBoard);
 
-// 				// Remove the ship from the list of available ships to place
-// 				let ship = document.querySelector(`#${data}`);
-// 				addShips.removeChild(ship);
-// 			}
-// 			break;
-// 	}
-// }
+		const shipElement = document.querySelector(
+			`#${ship.name.toLowerCase().replace(' ', '-')}`
+		);
+
+		// remove ship when placed so you dont get duplicates
+		if (shipElement) {
+			shipElement.parentElement.removeChild(shipElement);
+		}
+	}
+}
 
 /*
 	TO DO LIST 
@@ -210,6 +233,6 @@ function updateBoard(boardName, board) {
 	add random AI ships - done
 	end game when either side ships are fully destroyed - done
 	add modal and reset game button - done
-	let you drag ships to board
-	update display so that dragged ships are recorded
+	let you drag ships to board - done
+	update display so that dragged ships are recorded and game is playable
 */

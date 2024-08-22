@@ -114,7 +114,6 @@ body {
 	border-radius: 16px;
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
-	transition: 0.25s;
 }
 
 .game-over {
@@ -146,10 +145,19 @@ body {
 		border: 0;
 		color: #fff;
 		font-size: 1.25em;
+		cursor: pointer;
+		transition: 0.25s;
+
+		&:hover {
+			scale: 1.1;
+		}
+
+		&:active {
+			scale: 1;
+		}
 	}
 }
 
 .hidden {
 	display: none;
-	transition: 0.25s;
 }

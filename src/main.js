@@ -56,6 +56,8 @@ displayBoard('computer-board', enemyBoard);
 updateBoard('player-board', playerBoard);
 updateBoard('computer-board', enemyBoard);
 
+resetGame();
+
 function placeRandomAiShip(ship) {
 	// take the ai ship variables and randomize their position between 0 and 10 on the grid
 	let placed = false;
@@ -75,6 +77,7 @@ function shipAttacks(element) {
 	let x = parseInt(element.getAttribute('data-x'));
 	let y = parseInt(element.getAttribute('data-y'));
 	let modal = document.querySelector('.bg-blur');
+	let winnerText = document.querySelector('.winner');
 
 	if (
 		element.classList.contains('hit') ||
@@ -88,6 +91,7 @@ function shipAttacks(element) {
 
 	if (enemyBoard.allSunk()) {
 		modal.classList.remove('hidden');
+		winnerText.textContent = 'You win!';
 	}
 
 	computer.randomAttack();
@@ -95,7 +99,16 @@ function shipAttacks(element) {
 
 	if (playerBoard.allSunk()) {
 		modal.classList.remove('hidden');
+		winnerText.textContent = 'You lose...';
 	}
+}
+
+function resetGame() {
+	const reloadButton = document.querySelector('.retry');
+
+	reloadButton.addEventListener('click', () => {
+		location.reload();
+	});
 }
 
 function displayBoard(boardName, boardObj) {

@@ -101,7 +101,7 @@ body {
 }
 
 .block,
-.ship {
+.player-board > .ship {
 	background-color: var(--ship-color);
 
 	&:hover {

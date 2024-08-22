@@ -26,6 +26,9 @@ let destroyer = new Ship('Destroyer', 3);
 let submarine = new Ship('Submarine', 3);
 let patrolBoat = new Ship('Patrol Boat', 2);
 
+// Placed Ships Tracker
+let placedShips = 0;
+
 // AI Ships
 let aiCarrier = new Ship('Carrier', 5);
 let aiBattleship = new Ship('Battleship', 4);
@@ -207,6 +210,9 @@ function dropShip(e) {
 }
 
 function playerShipDrag(ship, x, y) {
+	let aiBoardDom = document.querySelector('.computer-board');
+	let shipsDom = document.querySelector('.player-ships');
+
 	if (playerBoard.checkIfValidCell(ship.length, x, y)) {
 		playerBoard.placeShip(ship, x, y);
 		updateBoard('player-board', playerBoard);
@@ -219,6 +225,13 @@ function playerShipDrag(ship, x, y) {
 		if (shipElement) {
 			shipElement.parentElement.removeChild(shipElement);
 		}
+
+		placedShips++;
+	}
+
+	if (placedShips === 5) {
+		aiBoardDom.classList.remove('hidden');
+		shipsDom.classList.add('hidden');
 	}
 }
 

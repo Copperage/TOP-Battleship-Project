@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Battleships</title>
+		<script defer src="main.js"></script>
+	</head>
+	<body>
+		<div class="header">Battleships</div>
+		<div class="content">
+			<div class="player-side">
+				<div class="player-board"></div>
+			</div>
+			<div class="computer-side">
+				<div class="computer-board hidden"></div>
+				<div class="player-ships">
+					<h1>Place your ships</h1>
+					<div class="ships-div">
+						<div class="ship carrier" id="carrier" draggable="true">
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+						</div>
+						<div class="ship battleship" id="battleship" draggable="true">
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+						</div>
+						<div class="ship destroyer" id="destroyer" draggable="true">
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+						</div>
+						<div class="ship submarine" id="submarine" draggable="true">
+							<div class="block"></div>
+							<div class="block"></div>
+							<div class="block"></div>
+						</div>
+						<div class="ship patrol-boat" id="patrol-boat" draggable="true">
+							<div class="block"></div>
+							<div class="block"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bg-blur hidden">
+			<modal class="game-over">
+				<p class="winner"></p>
+				<button class="retry">Play Again?</button>
+			</modal>
+		</div>
+	</body>
+</html>
+
+<!--
+	let carrier = new Ship('Carrier', 5);
+	let battleship = new Ship('Battleship', 4);
+	let destroyer = new Ship('Destroyer', 3);
+	let submarine = new Ship('Submarine', 3);
+	let patrolBoat = new Ship('Patrol Boat', 2);
+-->
